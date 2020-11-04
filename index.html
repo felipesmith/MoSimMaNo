@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Modelado y Simulacion</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap-grid.min.css">
+    <link rel="stylesheet" href="css/bootstrap-reboot.min.css">
+    <link rel="stylesheet" href="css/jsxgraph.css">
+    <link rel="stylesheet" href="css/mathquill/mathquill.css"/>
+</head>
+
+<body style="padding-top: 4.5rem;">
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <a class="navbar-brand" href="#">Modelado y Simulacion</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+            aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+</nav>
+
+<main role="main" class="container">
+    <div class="jumbotron">
+        <h1>Aproximación de funciones</h1>
+        <p class="lead">Con Euler, Euler mejorado y Runge-Kutta de orden 4</p>
+        <hr>
+        <h3>Derivada de la función a aproximar - y'</h3>
+        <div class="input-group mb-3">
+				<span type="text" class="form-control" id="mathFunction" aria-label="Función a aproximar"
+                      style="min-height:50px; text-align:center;" aria-describedby="inputGroup-sizing-sm"></span>
+        </div>
+        <hr>
+        <h3>Parámetros</h3>
+        <div class="input-group mb-3" style="width: 40%; display: inline-flex; margin-left: 10%">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroup-sizing-sm" style="min-width: 215px;"><b
+                        style="margin-right:5px;">a</b> - X0 - ci</span>
+            </div>
+            <input type="number" id="aCnt" class="form-control" aria-label="Sizing example input"
+                   aria-describedby="inputGroup-sizing-sm">
+        </div>
+
+        <div class="input-group mb-3" style="width: 40%; display: inline-flex">
+            <div class="input-group-prepend">
+                <span class="input-group-text" style="min-width: 215px;"><b
+                        style="margin-right:5px;">y</b> - Y0 - ci</span>
+            </div>
+            <input type="number" id="yCnt" value="0" class="form-control" aria-label="Sizing example input"
+                   aria-describedby="inputGroup-sizing-sm">
+        </div>
+
+        <div class="input-group mb-3" style="width: 40%; display: inline-flex; margin-left: 10%">
+            <div class="input-group-prepend">
+                <span class="input-group-text" style="min-width: 215px;"><b
+                        style="margin-right:5px;">b</b> - Xfinal</span>
+            </div>
+            <input type="number" id="bCnt" class="form-control" aria-label="Sizing example input"
+                   aria-describedby="inputGroup-sizing-sm">
+        </div>
+
+        <div class="input-group mb-3" style="width: 40%; display: inline-flex">
+            <div class="input-group-prepend">
+                <span class="input-group-text" style="min-width: 215px;"><b
+                        style="margin-right:5px;">h</b> - Ancho de intervalos</span>
+            </div>
+            <input type="number" id="hCnt" class="form-control" aria-label="Sizing example input"
+                   aria-describedby="inputGroup-sizing-sm">
+        </div>
+
+        <div class="input-group mb-3" style="width: 40%; display: inline-flex; margin-left: 30%">
+            <div class="input-group-prepend">
+                <span class="input-group-text" style="min-width: 215px;"><b
+                        style="margin-right:5px;">n</b> - Cantidad de intervalos</span>
+            </div>
+            <input type="number" id="nCnt" class="form-control" aria-label="Sizing example input"
+                   aria-describedby="inputGroup-sizing-sm">
+        </div>
+
+        <button class="btn btn-lg btn-primary" style="display: block; margin-left: 45%" role="button" id="resultBtn" disabled>Calcular</button>
+    </div>
+    <div class="jumbotron" style="text-align:center;">
+        <div id="jxgbox" class="jxgbox" style="height:500px">
+        </div>
+
+        <h4 style="margin-top: 15px;"><span style="background-color:red; padding:2px 15px;"></span><span
+                style="color: red; margin-left:10px;">Euler</span> — <span
+                style="background-color:blue; padding:2px 15px;"></span><span style="color: blue; margin-left:10px;">Euler mejorado</span>
+            — <span style="background-color:green; padding:2px 15px;"></span><span
+                    style="color: green; margin-left:10px;">Runge-Kutta</span></h4>
+    </div>
+</main>
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/bootstrap.bundle.min.js"></script>
+<script src="js/math.min.js"></script>
+<script src="js/latex-to-js.js"></script>
+<script src="js/jsxgraphcore.js"></script>
+<script src="js/mathquill/mathquill.js"></script>
+<script src="js/scripts/symodgraph.js"></script>
+<script type="text/javascript">
+    var functionEmpty = 1;
+    var mathFunction = "";
+
+    var MQ = MathQuill.getInterface(2);
+    var board = JXG.JSXGraph.initBoard('jxgbox', {boundingbox: [-7, 5, 7, -5], axis: true});
+
+    /**
+     *
+     * Results btn toggler
+     *
+     */
+
+    $("#aCnt").change(function () {
+        let a = $(this).val();
+
+        if (a == "") {
+            $("#hCnt").val("");
+            $("#nCnt").val("");
+        }
+
+        checkParameters();
+    });
+
+    $("#bCnt").change(function () {
+        let a = $("#aCnt").val();
+        let b = parseInt($(this).val());
+        let n;
+        let h = $("#hCnt").val();
+
+        if (b == "") {
+            $("#hCnt").val("");
+            $("#nCnt").val("");
+        }
+
+        if (a != "" && b != "" && h!="") {
+            if (h<0){
+                n = (a - b) / (h * -1);
+            }
+            else {
+                n = (b - a) / h;
+            }
+            $("#nCnt").val("");
+            $("#nCnt").val(n);
+        }
+
+        checkParameters();
+    });
+
+    $("#hCnt").change(function () {
+        let a = $("#aCnt").val();
+        let b = $("#bCnt").val();
+        let h = $(this).val();
+        let n;
+
+        if (a != "" && b != "") {
+            if (h<0){
+                n = (a - b) / (h * -1);
+            }
+            else {
+                n = (b - a) / h;
+            }
+            $("#nCnt").val(n);
+        }
+
+        checkParameters();
+    });
+
+    $("#nCnt").change(function () {
+        let a = $("#aCnt").val();
+        let b = $("#bCnt").val();
+        let n = $(this).val();
+        let h;
+
+        if (a != "" && b != "") {
+            h = (b - a) / n;
+            $("#hCnt").val(h);
+        }
+
+        checkParameters();
+    });
+
+    function checkParameters() {
+        var a = $("#aCnt").val();
+        var b = $("#bCnt").val();
+        var h = $("#hCnt").val();
+        var n = $("#nCnt").val();
+        var y = $("#yCnt").val();
+
+        if (h<0 && h!="") {
+            if (b > a && h!=""){
+                alert("El valor de b(limite) debe ser MENOR que a(x0) ya que h es negativo y voy hacia atras.")
+                $("#bCnt").val("");
+                b = "";
+                $("#nCnt").val("");
+            }
+        }
+        else {
+                if (a > b && h!=""){
+                    alert("El valor de b(limite) debe ser MAYOR que a(x0) ya que h es positivo y voy hacia delante.")
+                    $("#bCnt").val("");
+                    b = "";
+                    $("#nCnt").val("");
+                }
+        }
+
+        if (a !="" && b !="" && h !="" && n !="" && y !="" && functionEmpty === 0) {
+            $("#resultBtn").removeAttr("disabled");
+        } else {
+            $("#resultBtn").attr("disabled", "true");
+        }
+    }
+
+    $("#resultBtn").click(function () {
+        var a = parseFloat($("#aCnt").val());
+        var b = parseFloat($("#bCnt").val());
+        var h = parseFloat($("#hCnt").val());
+        var y = parseFloat($("#yCnt").val());
+
+        clearAllSingleGraph();
+        let result_euler = euler(mathFunction, a, b, h, y);
+        let result_ieuler = improvedEuler(mathFunction, a, b, h, y);
+        let result_rkutta = rungeKutta(mathFunction, a, b, h, y);
+
+        var x = result_euler[0].concat(result_ieuler[0]).concat(result_rkutta[0]);
+        var y = result_euler[1].concat(result_ieuler[1]).concat(result_rkutta[1]);
+
+        var min_x = Math.min.apply(null, x);
+        var max_x = Math.max.apply(null, x);
+        var min_y = Math.min.apply(null, y);
+        var max_y = Math.max.apply(null, y);
+
+        JXG.JSXGraph.freeBoard(board);
+        board = JXG.JSXGraph.initBoard('jxgbox', {boundingbox: [min_x, max_y, max_x, min_y], axis: true});
+
+        joinPointsInGraph("E", 'red', result_euler[0], result_euler[1]);
+        joinPointsInGraph("IE", 'blue', result_ieuler[0], result_ieuler[1]);
+        joinPointsInGraph("RK", 'green', result_rkutta[0], result_rkutta[1]);
+    });
+
+    /**
+     *
+     * Process MathQuill to MathJS
+     *
+     */
+
+    $(document).ready(function () {
+        var mathFunctionSpan = document.getElementById('mathFunction');
+        var mathFunctionMathField = MQ.MathField(mathFunctionSpan, {
+            handlers: {
+                edit: function () {
+                    var equationInLatex = mathFunctionMathField.latex();
+
+                    if (equationInLatex != "") {
+                        functionEmpty = 0;
+                    } else {
+                        functionEmpty = 1;
+                    }
+                    checkParameters();
+
+                    var preprocessed = preprocessMQtoMath(equationInLatex);
+
+                    console.log("preprocessed " + preprocessed);
+
+                    var eqForMath = latex_to_js(preprocessed);
+                    mathFunction = eqForMath;
+                    console.log("math function " + mathFunction);
+                }
+            }
+        });
+    });
+
+    /**
+     *
+     * Approximation methods functions
+     *
+     */
+
+    function euler(mathFunction, a, b, h, y) {
+
+        let data_x = new Array();
+        let data_y = new Array();
+        let n;
+        if (h<0) {
+            n = (a - b) / (h * -1);
+        }
+        else n = (b - a) / h;
+
+        data_x.push(a);
+        data_y.push(y);
+
+        for (var i = 0; i < n; i++) {
+            let xi = data_x[i];
+            let yi = data_y[i];
+
+            let yEv = evaluateFunction(mathFunction, xi, yi);
+            let yz = yi + (h * yEv);
+
+            data_x.push(xi + h);
+            data_y.push(yz);
+        }
+        console.log("Euler comun ", data_x, data_y);
+        return [data_x, data_y];
+    }
+
+    function improvedEuler(mathFunction, a, b, h, y) {
+
+        let data_x = new Array();
+        let data_y = new Array();
+        let n;
+        if (h<0) {
+            n = (a - b) / (h * -1);
+        }
+        else n = (b - a) / h;
+
+        data_x.push(a);
+        data_y.push(y);
+
+        for (var i = 0; i < n; i++) {
+            let xi = data_x[i];
+            let yi = data_y[i];
+
+            let yEv1 = evaluateFunction(mathFunction, xi, yi);
+            let yEv2 = evaluateFunction(mathFunction, xi + h, (yi + (h * yEv1)) );
+
+            let yz = yi + (h * 0.5 * (yEv1 + yEv2));
+
+            data_x.push(xi + h);
+            data_y.push(yz);
+        }
+        console.log("Euler Mejorado", data_x, data_y);
+        return [data_x, data_y];
+    }
+
+    function rungeKutta(mathFunction, a, b, h, y) {
+
+        let data_x = new Array();
+        let data_y = new Array();
+        let n;
+        if (h<0) {
+            n = (a - b) / (h * -1);
+        }
+            else n = (b - a) / h;
+
+        data_x.push(a);
+        data_y.push(y);
+
+        let xant, yant, k1, k2, k3, k4, xaux, yaux, yi;
+
+        for (var i = 0; i < n; i++) {
+            xant = data_x[i];
+            yant = data_y[i];
+            k1 = evaluateFunction(mathFunction, xant, yant);
+
+            xaux = xant + (0.5 * h);
+            yaux = yant + (0.5 * k1 * h);
+            k2 = evaluateFunction(mathFunction, xaux, yaux);
+
+            yaux = yant + (0.5 * k2 * h);
+            k3 = evaluateFunction(mathFunction, xaux, yaux);
+
+            xaux = xant + h;
+            yaux = yant + (k3 * h);
+            k4 = evaluateFunction(mathFunction, xaux, yaux);
+
+            yi = yant + (h/6 * (k1 + (2*k2) + (2*k3) + k4 ));
+
+            data_x.push(xaux);
+            data_y.push(yi);
+        }
+        console.log("Runge Kutta ", data_x, data_y);
+        return [data_x, data_y];
+    }
+</script>
+</body>
+</html>
