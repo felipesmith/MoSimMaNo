@@ -1,21 +1,10 @@
 'use strict';
 
-/*
-*
-* JSXGraph added functions
-*
-*/
+/** Funciones JSXGraph */
 
 function clearAllSingleGraph() {
     JXG.JSXGraph.freeBoard(board);
     board = JXG.JSXGraph.initBoard('jxgbox', {boundingbox: [-7, 7, 7, -7], axis: true});
-}
-
-function clearAll() {
-    JXG.JSXGraph.freeBoard(board);
-    JXG.JSXGraph.freeBoard(boardd);
-    board = JXG.JSXGraph.initBoard('jxgbox', {boundingbox: [-7, 7, 7, -7], axis: true});
-    boardd = JXG.JSXGraph.initBoard('result', {boundingbox: [-7, 5, 7, -5], axis: true});
 }
 
 function joinPointsInGraph(name, color, data_x, data_y) {
@@ -27,40 +16,8 @@ function joinPointsInGraph(name, color, data_x, data_y) {
         });
 }
 
-function addResultToSecondGraph(mathFunction, a, b) {
-    fd = boardd.jc.snippet(mathFunction, true, 'x', true);
-    curved = boardd.create('functiongraph', [fd,
-        function () {
-            var c = new JXG.Coords(JXG.COORDS_BY_SCREEN, [0, 0], boardd);
-            return c.usrCoords[1];
-        },
-        function () {
-            var c = new JXG.Coords(JXG.COORDS_BY_SCREEN, [boardd.canvasWidth, 0], boardd);
-            return c.usrCoords[1];
-        }]);
 
-    var i1 = boardd.create('integral', [[a, b], curved]);
-}
-
-function addFunctionToGraph(mathFunction, color) {
-    f = board.jc.snippet(mathFunction, true, 'x', true);
-    curve = board.create('functiongraph', [f,
-        function () {
-            var c = new JXG.Coords(JXG.COORDS_BY_SCREEN, [0, 0], board);
-            return c.usrCoords[1];
-        },
-        function () {
-            var c = new JXG.Coords(JXG.COORDS_BY_SCREEN, [board.canvasWidth, 0], board);
-            return c.usrCoords[1];
-        }]);
-}
-
-
-/*
-*
-* Math Equation Utils
-*
-*/
+/** Funciones Matematicas */
 
 function evaluateFunction(mathFunction, x, y) {
     x = typeof x !== 'undefined' ? x : 0;
@@ -85,10 +42,10 @@ function findMax(mathFunction, a, b) {
 
     for (var i = 0; i < n; i++) {
         xEv = a + 0.1 * i;
-        let resultado = evaluateFunction(mathFunction, xEv);
+        let result = evaluateFunction(mathFunction, xEv);
 
-        if (resultado > max) {
-            max = resultado;
+        if (result > max) {
+            max = result;
             x = xEv;
         }
     }
@@ -96,10 +53,11 @@ function findMax(mathFunction, a, b) {
 }
 
 function preprocessMQtoMath(mqString) {
-    var result;
+    let result;
     result = mqString.replace(/\\cdot\\/g, "*");
     result = result.replace(/\\cdot/g, "*");
     result = result.replace(/\\ln/g, "log");
+    result = result.replace(/\\frac{([^}]+)}{([^}]+)}/g, "($1)/($2)");
     result = result.replace(new RegExp('{'), '(');
     result = result.replace(new RegExp('}'), ')');
     result = result.replace(new RegExp('~'), '');
