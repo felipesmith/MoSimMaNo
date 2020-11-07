@@ -1,0 +1,50 @@
+.btn-grad {
+  background-image: linear-gradient(
+    to right,
+    #314755 0%,
+    #26a0da 51%,
+    #314755 100%
+  );
+  margin: 10px;
+  padding: 15px 45px;
+  text-align: center;
+  text-transform: uppercase;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: white;
+  box-shadow: 0 0 20px #eee;
+  border-radius: 10px;
+}
+.btn:active {
+  transform: scale(0.95);
+}
+
+.btn-grad:hover {
+  background-position: right center;
+  color: #fff;
+  text-decoration: none;
+}
+
+.btn.disabled,
+.btn:disabled {
+  opacity: 0.4 !important;
+}
+
+#mathFunction {
+  box-shadow: 5px 5px 15px #9ba5ab;
+  outline: 0 !important;
+}
+
+#a:focus,
+#b:focus,
+#n:focus,
+#h:focus,
+#y:focus {
+  box-shadow: 5px 5px 5px #9ba5ab;
+  outline: 0 !important;
+}
+
+.input-group-text {
+  background: linear-gradient(#fff, #fafafa);
+  border: none;
+}
