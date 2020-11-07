@@ -33,6 +33,10 @@
 #mathFunction {
   box-shadow: 5px 5px 15px #9ba5ab;
   outline: 0 !important;
+  font-size: xx-large;
+  min-height: 80px;
+  text-align:center;
+  border-radius: 15px;
 }
 
 #a:focus,
@@ -47,4 +51,12 @@
 .input-group-text {
   background: linear-gradient(#fff, #fafafa);
   border: none;
+}
+
+#mathFunction:nth-child(2) {
+  height: inherit;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
 }
