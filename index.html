@@ -108,7 +108,7 @@
                     <span style="margin-left:10px;">
                         <svg version="1.1" xmlns="http://www.w3.org/2000/svg" style="position: relative; top: -2px;"
                             width="20px" height="20px" viewBox="0 0 120 120">
-                            <circle cx="60" cy="60" r="50" fill="red" />
+                            <circle cx="60" cy="60" r="50" fill="#1194f2" />
                         </svg>
                     Euler
                     </span>
@@ -116,7 +116,7 @@
                     <span style="margin-left:10px;">
                         <svg version="1.1" xmlns="http://www.w3.org/2000/svg" style="position: relative; top: -2px;"
                              width="20px" height="20px" viewBox="0 0 120 120">
-                            <circle cx="60" cy="60" r="50" fill="blue" />
+                            <circle cx="60" cy="60" r="50" fill="#d11919" />
                         </svg>
                         Euler mejorado
                     </span>
@@ -124,7 +124,7 @@
                     <span style="margin-left:10px;">
                         <svg version="1.1" xmlns="http://www.w3.org/2000/svg" style="position: relative; top: -2px;"
                                  width="20px" height="20px" viewBox="0 0 120 120">
-                            <circle cx="60" cy="60" r="50" fill="green" />
+                            <circle cx="60" cy="60" r="50" fill="#36e00b" />
                         </svg>
                         Runge-Kutta
                     </span>
@@ -281,9 +281,9 @@
             JXG.JSXGraph.freeBoard(board);
             board = JXG.JSXGraph.initBoard('jxgbox', {boundingbox: [min_x, max_y, max_x, min_y], axis: true});
 
-            joinPointsInGraph("E", 'red', result_euler[0], result_euler[1]);
-            joinPointsInGraph("IE", 'blue', result_ieuler[0], result_ieuler[1]);
-            joinPointsInGraph("RK", 'green', result_rkutta[0], result_rkutta[1]);
+            joinPointsInGraph("E", '#1194f2', result_euler[0], result_euler[1]);
+            joinPointsInGraph("IE", '#d11919', result_ieuler[0], result_ieuler[1]);
+            joinPointsInGraph("RK", '#36e00b', result_rkutta[0], result_rkutta[1]);
 
             document.getElementById("graphicInfo").innerHTML = "Grafico de y' = " + mathFunction;
         });
