@@ -12,8 +12,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,600;0,700;1,300;1,400&display=swap" rel="stylesheet">
 </head>
 
-<body style="padding-top: 4.5rem; font-family: 'Open Sans';height: 100vh; background-image: linear-gradient(to bottom, #d7d2cc 75%, #304352 100%);">
-    <nav class="navbar navbar-expand-md navbar-dark fixed-top " style="background:#0096d2;box-shadow: 0px 0px 10px #27272780;">
+<body style="padding-top: 4.5rem; font-family: 'Open Sans',cursive ;height: 100vh; background-image: linear-gradient(to bottom, #d7d2cc 77%, #304352 100%);">
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top " style="background:#0096d2;box-shadow: 0 0 10px #27272780;">
         <a class="navbar-brand" href="#" style="text-align: center; margin: auto; font-weight: bold; ">
             Métodos de Euler, Euler Mejorado y Runge Kutta de orden 4
         </a>
@@ -28,69 +28,69 @@
                 <span type="text" class="form-control" id="mathFunction" aria-label="Función a aproximar"
                       aria-describedby="inputGroup-sizing-sm">
                 </span>
-                <span>&nbsp;</span><img src="information.png" style="width: 15px; height: 15px;" title="F(x,y). Es una función que depende de X e Y.">
+                <span>&nbsp;</span><img class="mt-1" src="information.svg" style="width: 15px; height: 15px;" title="F(x,y). Es una función que depende de X e Y." alt="?">
             </div>
             <hr>
 
-            <h4 style="text-align: center;font-weight: bold;">Parámetros</h4>
+            <h4 class="mb-3" style="text-align: center;font-weight: bold;">Condición inicial y Parámetros</h4>
 
-            <div class="input-group " style="width: 47%; margin: auto;" title="Condición inicial X0">
+            <div class="input-group " title="Condición inicial X0">
                 <div class="input-group-prepend" >
-                    <span class="input-group-text" id="inputGroup-sizing-sm" style="min-width: 215px;border-radius: 15px 0px 0px 15px">
+                    <span class="input-group-text" id="inputGroup-sizing-sm" style="min-width: 215px;border-radius: 15px 0 0 15px">
                         <b style="margin-right:5px;">X0</b>
                         - CI
                     </span>
                 </div>
                 <input type="number" id="a" class="form-control" aria-label="Sizing example input"
-                       aria-describedby="inputGroup-sizing-sm" style="border-radius: 0px 15px 15px 0px;">
+                       aria-describedby="inputGroup-sizing-sm" style="border-radius: 0 15px 15px 0;" placeholder="Condición inical X0">
             </div>
             <br>
 
-            <div class="input-group" style="width: 47%; margin: auto;" title="Condición inicial Y0">
+            <div class="input-group" title="Condición inicial Y0">
                 <div class="input-group-prepend">
-                    <span class="input-group-text" style="min-width: 215px;border-radius: 15px 0px 0px 15px">
+                    <span class="input-group-text" style="min-width: 215px;border-radius: 15px 0 0 15px">
                         <b style="margin-right:5px;">Y0</b>
                         - CI
                     </span>
                 </div>
                 <input type="number" id="y" class="form-control" aria-label="Sizing example input"
-                       aria-describedby="inputGroup-sizing-sm" style="border-radius: 0px 15px 15px 0px;">
+                       aria-describedby="inputGroup-sizing-sm" style="border-radius: 0 15px 15px 0;" placeholder="Condición inical Y0">
             </div>
             <br>
 
-            <div class="input-group" style="width: 47%; margin: auto;" title="Límite de aproximación">
+            <div class="input-group" title="Límite de aproximación">
                 <div class="input-group-prepend">
-                    <span class="input-group-text" style="min-width: 215px;border-radius: 15px 0px 0px 15px">
+                    <span class="input-group-text" style="min-width: 215px;border-radius: 15px 0 0 15px">
                         <b style="margin-right:5px;">b</b>
                         - Xfinal
                     </span>
                 </div>
                 <input type="number" id="b" class="form-control" aria-label="Sizing example input"
-                       aria-describedby="inputGroup-sizing-sm" style="border-radius: 0px 15px 15px 0px;" autocomplete="off">
+                       aria-describedby="inputGroup-sizing-sm" style="border-radius: 0 15px 15px 0;" autocomplete="off" placeholder="Límite de aproximación">
             </div>
             <br>
 
-            <div class="input-group" style="width: 47%; margin: auto;" title="Tamaño del paso">
+            <div class="input-group" title="Tamaño del paso">
                 <div class="input-group-prepend">
-                    <span class="input-group-text" style="min-width: 215px;border-radius: 15px 0px 0px 15px;">
+                    <span class="input-group-text" style="min-width: 215px;border-radius: 15px 0 0 15px;">
                         <b style="margin-right:5px;">h</b>
                         - Ancho de intervalos
                     </span>
                 </div>
                 <input type="number" id="h" class="form-control" aria-label="Sizing example input"
-                       aria-describedby="inputGroup-sizing-sm" style="border-radius: 0px 15px 15px 0px;">
+                       aria-describedby="inputGroup-sizing-sm" style="border-radius: 0 15px 15px 0;" placeholder="Tamaño del paso">
             </div>
             <br>
 
-            <div class="input-group" style="width: 47%; margin: auto;" title="Cantidad de pasos">
+            <div class="input-group" title="Cantidad de pasos">
                 <div class="input-group-prepend">
-                    <span class="input-group-text" style="min-width: 215px;border-radius: 15px 0px 0px 15px;">
+                    <span class="input-group-text" style="min-width: 215px;border-radius: 15px 0 0 15px;">
                         <b style="margin-right:5px;">n</b>
                         - Cantidad de intervalos
                     </span>
                 </div>
                 <input type="number" id="n" class="form-control" aria-label="Sizing example input"
-                       aria-describedby="inputGroup-sizing-sm" style="border-radius: 0px 15px 15px 0px;">
+                       aria-describedby="inputGroup-sizing-sm" style="border-radius: 0 15px 15px 0;" placeholder="Cantidad de pasos">
             </div>
             <br>
 
@@ -292,11 +292,11 @@
         /** Procesar MathQuill a MathJS */
 
         $(document).ready(function () {
-            var mathFunctionSpan = document.getElementById('mathFunction');
-            var mathFunctionMathField = MQ.MathField(mathFunctionSpan, {
+            let mathFunctionSpan = document.getElementById('mathFunction');
+            let mathFunctionMathField = MQ.MathField(mathFunctionSpan, {
                 handlers: {
                     edit: function () {
-                        var equationInLatex = mathFunctionMathField.latex();
+                        let equationInLatex = mathFunctionMathField.latex();
 
                         if (equationInLatex != "") {
                             functionEmpty = 0;
@@ -309,8 +309,7 @@
 
                         console.log("preprocessed " + preprocessed);
 
-                        var eqForMath = latex_to_js(preprocessed);
-                        mathFunction = eqForMath;
+                        mathFunction = latex_to_js(preprocessed);
                         console.log("math function " + mathFunction);
                     }
                 }
@@ -322,8 +321,8 @@
 
         function euler(mathFunction, x0, b, h, y0) {
 
-            let data_x = new Array();
-            let data_y = new Array();
+            let data_x = [];
+            let data_y = [];
             let n;
             if (h<0) {
                 n = (x0 - b) / (h * -1);
@@ -333,7 +332,7 @@
             data_x.push(x0);
             data_y.push(y0);
 
-            for (var i = 0; i < n; i++) {
+            for (let i = 0; i < n; i++) {
                 let xn = data_x[i];
                 let yn = data_y[i];
 
@@ -349,8 +348,8 @@
 
         function improvedEuler(mathFunction, x0, b, h, y0) {
 
-            let data_x = new Array();
-            let data_y = new Array();
+            let data_x = [];
+            let data_y = [];
             let n;
             if (h<0) {
                 n = (x0 - b) / (h * -1);
@@ -360,7 +359,7 @@
             data_x.push(x0);
             data_y.push(y0);
 
-            for (var i = 0; i < n; i++) {
+            for (let i = 0; i < n; i++) {
                 let xn = data_x[i];
                 let yn = data_y[i];
 
@@ -378,8 +377,8 @@
 
         function rungeKutta(mathFunction, x0, b, h, y0) {
 
-            let data_x = new Array();
-            let data_y = new Array();
+            let data_x = [];
+            let data_y = [];
             let n;
             if (h<0) {
                 n = (x0 - b) / (h * -1);
@@ -391,7 +390,7 @@
 
             let xn, yn, k1, k2, k3, k4, xaux, yaux, yn1;
 
-            for (var i = 0; i < n; i++) {
+            for (let i = 0; i < n; i++) {
                 xn = data_x[i];
                 yn = data_y[i];
                 k1 = evaluateFunction(mathFunction, xn, yn);

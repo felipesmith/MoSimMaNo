@@ -60,3 +60,20 @@
   align-items: center;
 
 }
+
+::-webkit-input-placeholder {
+  color: red;
+  font-size: 12px;
+  font-style: italic;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.input-group {
+  width: 53%;
+  margin: auto;
+}
