@@ -2,12 +2,12 @@
 
 /** Funciones JSXGraph */
 
-function clearAllSingleGraph() {
+function clearGraph() {
     JXG.JSXGraph.freeBoard(board);
     board = JXG.JSXGraph.initBoard('jxgbox', {boundingbox: [-7, 7, 7, -7], axis: true});
 }
 
-function joinPointsInGraph(name, color, data_x, data_y) {
+function curveGraph(name, color, data_x, data_y) {
     board.create('curve',
         [data_x, data_y],
         {
@@ -52,9 +52,9 @@ function findMax(mathFunction, a, b) {
     return [max, x];
 }
 
-function preprocessMQtoMath(mqString) {
+function preprocessMQtoMath(mq) {
     let result;
-    result = mqString.replace(/\\cdot\\/g, "*");
+    result = mq.replace(/\\cdot\\/g, "*");
     result = result.replace(/\\cdot/g, "*");
     result = result.replace(/\\ln/g, "log");
     result = result.replace(/\\frac{([^}]+)}{([^}]+)}/g, "($1)/($2)");

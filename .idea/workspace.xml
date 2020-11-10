@@ -40,6 +40,9 @@
       <workItem from="1604770166290" duration="2977000" />
       <workItem from="1604779012425" duration="828000" />
       <workItem from="1604947882168" duration="5185000" />
+      <workItem from="1604973223870" duration="1194000" />
+      <workItem from="1604974471522" duration="200000" />
+      <workItem from="1604974808483" duration="43000" />
     </task>
     <servers />
   </component>
@@ -51,9 +54,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="777" y="434" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/-2560.0.2560.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1604950294533" />
-    <state x="667" y="119" width="585" height="801" key="find.popup" timestamp="1604950006722">
+    <state x="667" y="119" width="585" height="801" key="find.popup" timestamp="1604974245507">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="667" y="119" width="585" height="801" key="find.popup/-2560.0.2560.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1604950006722" />
+    <state x="-1671" y="119" width="780" height="801" key="find.popup/-2560.0.2560.1040/0.0.1920.1040@-2560.0.2560.1040" timestamp="1604972455022" />
+    <state x="667" y="119" width="585" height="801" key="find.popup/-2560.0.2560.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1604974245507" />
   </component>
 </project>

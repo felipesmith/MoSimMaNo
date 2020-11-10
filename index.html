@@ -95,7 +95,7 @@
             <br>
 
             <div class="mt-3" style="text-align: center">
-                <button class="btn btn-sm btn-grad" role="button" id="resultBtn" disabled>Calcular</button>
+                <button class="btn btn-sm btn-grad" role="button" id="result" disabled>Calcular</button>
             </div>
 
         </div>
@@ -253,39 +253,49 @@
             }
 
             if (a !="" && b !="" && h !="" && n !="" && y !="" && functionEmpty === 0) {
-                $("#resultBtn").removeAttr("disabled");
+                $("#result").removeAttr("disabled");
             } else {
-                $("#resultBtn").attr("disabled", "true");
+                $("#result").attr("disabled", "true");
             }
         }
 
-        $("#resultBtn").click(function () {
+        $("#result").click(function () {
             let a = parseFloat($("#a").val());
             let b = parseFloat($("#b").val());
             let h = parseFloat($("#h").val());
             let y = parseFloat($("#y").val());
 
-            clearAllSingleGraph();
-            let result_euler = euler(mathFunction, a, b, h, y);
-            let result_ieuler = improvedEuler(mathFunction, a, b, h, y);
-            let result_rkutta = rungeKutta(mathFunction, a, b, h, y);
+            clearGraph();
+            let dataEuler = euler(mathFunction, a, b, h, y);
+            let dataImprovedEuler = improvedEuler(mathFunction, a, b, h, y);
+            let dataRungeKutta = rungeKutta(mathFunction, a, b, h, y);
 
-            let x = result_euler[0].concat(result_ieuler[0]).concat(result_rkutta[0]);
-            let yy = result_euler[1].concat(result_ieuler[1]).concat(result_rkutta[1]);
+            let xx = dataEuler[0].concat(dataImprovedEuler[0]).concat(dataRungeKutta[0]);
+            let yy = dataEuler[1].concat(dataImprovedEuler[1]).concat(dataRungeKutta[1]);
 
-            let min_x = Math.min.apply(null, x);
-            let max_x = Math.max.apply(null, x);
+            let min_x = Math.min.apply(null, xx);
+            let max_x = Math.max.apply(null, xx);
             let min_y = Math.min.apply(null, yy);
             let max_y = Math.max.apply(null, yy);
 
             JXG.JSXGraph.freeBoard(board);
-            board = JXG.JSXGraph.initBoard('jxgbox', {boundingbox: [min_x, max_y, max_x, min_y], axis: true});
+            board = JXG.JSXGraph.initBoard('jxgbox', {
+                boundingbox: [min_x, max_y, max_x, min_y],
+                axis: true,
+                pan: {
+                    enabled: true,
+                    needShift: false
+                },
+                zoom: {
+                    needShift: false
+                }
+            });
 
-            joinPointsInGraph("E", '#1194f2', result_euler[0], result_euler[1]);
-            joinPointsInGraph("IE", '#d11919', result_ieuler[0], result_ieuler[1]);
-            joinPointsInGraph("RK", '#36e00b', result_rkutta[0], result_rkutta[1]);
+            curveGraph("E", '#1194f2', dataEuler[0], dataEuler[1]);
+            curveGraph("IE", '#d11919', dataImprovedEuler[0], dataImprovedEuler[1]);
+            curveGraph("RK", '#36e00b', dataRungeKutta[0], dataRungeKutta[1]);
 
-            document.getElementById("graphicInfo").innerHTML = "Grafico de y' = " + mathFunction;
+            document.getElementById("graphicInfo").innerHTML = "Gráfico de y' = " + mathFunction;
         });
 
 
@@ -305,8 +315,7 @@
                         }
                         checkParameters();
 
-                        var preprocessed = preprocessMQtoMath(equationInLatex);
-
+                        let preprocessed = preprocessMQtoMath(equationInLatex);
                         console.log("preprocessed " + preprocessed);
 
                         mathFunction = latex_to_js(preprocessed);
